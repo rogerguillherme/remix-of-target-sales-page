@@ -32,7 +32,7 @@ const Login = () => {
         description: "Redirecionando para o dashboard...",
       });
 
-      navigate("/dashboard");
+      navigate("/");
     } catch (error: any) {
       toast({
         title: "Erro ao fazer login",
@@ -53,7 +53,7 @@ const Login = () => {
         email,
         password,
         options: {
-          emailRedirectTo: `${window.location.origin}/dashboard`,
+          emailRedirectTo: `${window.location.origin}/`,
         },
       });
 
@@ -72,7 +72,7 @@ const Login = () => {
 
       if (signInError) throw signInError;
 
-      navigate("/dashboard");
+      navigate("/");
     } catch (error: any) {
       toast({
         title: "Erro ao criar conta",
@@ -88,7 +88,7 @@ const Login = () => {
     <div className="min-h-screen bg-background flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-2xl text-center">Dashboard - Target</CardTitle>
+          <CardTitle className="text-2xl text-center">🙏 Painel — Jejum de Daniel</CardTitle>
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="login" className="w-full">
