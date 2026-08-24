@@ -89,10 +89,10 @@ create policy "admin manages jobs"
   using (public.is_jejum_admin())
   with check (public.is_jejum_admin());
 
--- ---- Semente: fluxo padrão do Jejum de Daniel (Turma de Estreia) ----------
+-- ---- Semente: fluxo padrão do Jejum de Daniel (convite direto, sem turma) --
 insert into public.flows (name, steps, purchase_messages, no_sale_messages, active)
 select
-  'Jejum de Daniel — Turma de Estreia',
+  'Jejum de Daniel — Convite direto',
   '[
     {"delayMin":0,"type":"send","messages":[
       {"type":"text","text":"Que alegria ter você aqui! 🙌 Deus preparou algo lindo pra esses seus próximos dias."},
@@ -101,32 +101,31 @@ select
       {"type":"text","text":"E me conta, pra eu já orar por você: *qual o principal motivo que te levou a buscar esse jejum agora?* 💬"}
     ]},
     {"delayMin":2,"type":"send","messages":[
-      {"type":"text","text":"Deixa eu te contar uma novidade especial. 💛\n\nEstou abrindo a *Turma de Estreia* do Jejum de Daniel Guiado — 21 dias em que você recebe, todo dia aqui no WhatsApp, um versículo, uma oração guiada e o foco do dia, com uma turma que começa *{{data_inicio}}*."},
-      {"type":"text","text":"Fazer sozinha é difícil (a maioria desiste na 1ª semana). Guiada e em turma, você chega até o fim. 🙏\n\nComo você é uma das *primeiras*, leva o *bônus de fundadora*: o Kit completo (áudios das orações + receituário) e 1 mês da comunidade Manhã Espiritual — tudo incluso."},
-      {"type":"text","text":"As vagas são limitadas e as inscrições vão só até *{{data_limite}}*.\n\n✨ Quero ser fundadora 👉 {{link}}"}
+      {"type":"text","text":"Separei uma coisa especial pra você. 💛\n\nO *Jejum de Daniel Guiado*: 21 dias em que você recebe, todo dia aqui no WhatsApp, um versículo, uma oração guiada e o foco do dia — pra você não fazer esse caminho sozinha."},
+      {"type":"text","text":"É por *R$79*, com *7 dias de teste*: se sentir que não é pra você, é só pedir e devolvemos tudo, sem burocracia."},
+      {"type":"text","text":"Quer começar agora? 👉 {{link}}"}
     ]},
     {"delayMin":180,"type":"send","messages":[
-      {"type":"text","text":"{{nome}}, as vagas da Turma de Estreia estão acabando 🙏\n\nUma coisa que ouço muito: \"eu nunca tinha conseguido terminar um jejum — com o acompanhamento diário, dessa vez cheguei ao fim renovada.\"\n\nNão quero que você fique de fora 👉 {{link}}"}
+      {"type":"text","text":"Fazer o jejum sozinha costuma ser difícil — a maioria desiste na 1ª semana por falta de direção. 🙏\n\nGuiada, você tem o passo a passo todo dia, direto aqui no WhatsApp. Ainda dá tempo de começar hoje 👉 {{link}}"}
     ]},
     {"delayMin":1440,"type":"send","messages":[
-      {"type":"text","text":"Bom dia! ☀️ Começa o dia com a Palavra:\n\n\"Daniel firmou o propósito de não se contaminar.\" (Dn 1:8) — tudo começa com uma decisão do coração. Hoje, escolha buscar a Deus em primeiro lugar. 🙏"},
-      {"type":"text","text":"É assim, todo dia, na turma. As inscrições da estreia fecham *{{data_limite}}*:\n\nQuero participar 👉 {{link}}"}
+      {"type":"text","text":"Bom dia! ☀️ Começa o dia com a Palavra:\n\n\"Daniel firmou o propósito de não se contaminar.\" (Dn 1:8) — tudo começa com uma decisão do coração. A sua pode ser hoje."},
+      {"type":"text","text":"Comece o Jejum de Daniel Guiado agora 👉 {{link}}"}
     ]},
     {"delayMin":2880,"type":"send","messages":[
-      {"type":"text","text":"{{nome}}, faltam poucos dias pras inscrições da Turma de Estreia fecharem (*{{data_limite}}*) ⏳\n\nImagina daqui a 21 dias: uma rotina de oração firmada, mais paz, mais perto de Deus — e acompanhada o caminho todo, não sozinha."},
-      {"type":"text","text":"E ainda com o bônus de fundadora, que só existe nesta primeira turma. 💛\n\nQuero minha vaga 👉 {{link}}"}
+      {"type":"text","text":"Uma coisa que ouço bastante de quem já fez: \"sozinha eu nunca tinha conseguido terminar um jejum — guiada, dessa vez cheguei ao fim renovada.\" 🙏\n\nPode ser assim com você também 👉 {{link}}"}
     ]},
     {"delayMin":4320,"type":"send","messages":[
-      {"type":"text","text":"🚨 Últimas horas! As inscrições da Turma de Estreia encerram *hoje à noite*.\n\nSe ficou na dúvida, me chama aqui que eu te ajudo. Mas se o seu coração já disse sim 👉 {{link}}"}
+      {"type":"text","text":"{{nome}}, ainda dá tempo de começar o Jejum de Daniel Guiado — 21 dias com devocional diário, oração guiada e todo o suporte por aqui.\n\nR$79, com garantia de 7 dias. Se ficou na dúvida, me chama que eu te ajudo. Se o coração já disse sim 👉 {{link}}"}
     ]},
-    {"delayMin":4380,"type":"action","action":"mark_nao_comprou"}
+    {"delayMin":7200,"type":"action","action":"mark_nao_comprou"}
   ]'::jsonb,
   '[
-    {"type":"text","text":"🎉 Bem-vinda, fundadora {{nome}}! Que honra ter você na Turma de Estreia. 🙏"},
-    {"type":"text","text":"Seu material de preparação já está a caminho: 📄 Planner · 🎧 Áudios · 🍃 Receituário.\n\nVocê já entra no *Canal da Turma de Estreia* ✅. Começamos juntas em *{{data_inicio}}* — prepare o coração!"}
+    {"type":"text","text":"🎉 Que alegria, {{nome}}! Seja muito bem-vinda ao Jejum de Daniel Guiado. 🙏"},
+    {"type":"text","text":"Seu material já está a caminho: 📄 Planner · 🎧 Áudios de oração · 🍃 Receituário. Você já pode começar quando quiser — não precisa esperar ninguém. Qualquer dúvida, é só chamar por aqui. 💛"}
   ]'::jsonb,
   '[
-    {"type":"text","text":"Tudo bem não ter dado certo desta vez 💛 Vou te enviando uma palavra de vez em quando e te aviso quando abrir a próxima turma.\n\n(Se não quiser mais receber, é só responder SAIR.)"}
+    {"type":"text","text":"Tudo bem não ter sido agora 💛 Vou te mandando uma palavra de vez em quando.\n\nSe quiser começar o Jejum de Daniel Guiado quando fizer mais sentido pra você, é só me chamar aqui. (Se preferir não receber mais nada, é só responder SAIR.)"}
   ]'::jsonb,
   true
 where not exists (select 1 from public.flows);

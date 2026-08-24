@@ -14,6 +14,3 @@ verify_jwt = false
 
 [functions.manual-send-flow]
 verify_jwt = false
-
-[functions.evolution-debug]
-verify_jwt = false
