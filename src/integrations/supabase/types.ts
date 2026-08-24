@@ -16,90 +16,119 @@ export type Database = {
     Tables: {
       contacts: {
         Row: {
-          number: string
-          name: string | null
-          status: string
-          flow_id: string | null
           created_at: string
+          flow_id: string | null
+          name: string | null
+          number: string
+          status: string
         }
         Insert: {
-          number: string
-          name?: string | null
-          status?: string
-          flow_id?: string | null
           created_at?: string
+          flow_id?: string | null
+          name?: string | null
+          number: string
+          status?: string
         }
         Update: {
-          number?: string
-          name?: string | null
-          status?: string
-          flow_id?: string | null
           created_at?: string
+          flow_id?: string | null
+          name?: string | null
+          number?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "contacts_flow_id_fkey"
+            columns: ["flow_id"]
+            isOneToOne: false
+            referencedRelation: "flows"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      flows: {
+        Row: {
+          active: boolean
+          created_at: string
+          id: string
+          name: string
+          no_sale_messages: Json
+          purchase_messages: Json
+          steps: Json
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          id?: string
+          name?: string
+          no_sale_messages?: Json
+          purchase_messages?: Json
+          steps?: Json
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          id?: string
+          name?: string
+          no_sale_messages?: Json
+          purchase_messages?: Json
+          steps?: Json
+        }
+        Relationships: []
+      }
+      jejum_admins: {
+        Row: {
+          email: string
+        }
+        Insert: {
+          email: string
+        }
+        Update: {
+          email?: string
         }
         Relationships: []
       }
       jobs: {
         Row: {
+          done: boolean
+          flow_id: string | null
           id: number
           number: string
-          flow_id: string | null
-          stage: number
           run_at: string
-          done: boolean
+          stage: number
         }
         Insert: {
-          id?: number
+          done?: boolean
+          flow_id?: string | null
+          id?: never
           number: string
-          flow_id?: string | null
-          stage: number
           run_at: string
-          done?: boolean
+          stage: number
         }
         Update: {
-          id?: number
-          number?: string
+          done?: boolean
           flow_id?: string | null
-          stage?: number
+          id?: never
+          number?: string
           run_at?: string
-          done?: boolean
+          stage?: number
         }
-        Relationships: []
-      }
-      flows: {
-        Row: {
-          id: string
-          name: string
-          steps: Json
-          purchase_messages: Json
-          no_sale_messages: Json
-          active: boolean
-          created_at: string
-        }
-        Insert: {
-          id?: string
-          name?: string
-          steps?: Json
-          purchase_messages?: Json
-          no_sale_messages?: Json
-          active?: boolean
-          created_at?: string
-        }
-        Update: {
-          id?: string
-          name?: string
-          steps?: Json
-          purchase_messages?: Json
-          no_sale_messages?: Json
-          active?: boolean
-          created_at?: string
-        }
-        Relationships: []
-      }
-      jejum_admins: {
-        Row: { email: string }
-        Insert: { email: string }
-        Update: { email?: string }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "jobs_flow_id_fkey"
+            columns: ["flow_id"]
+            isOneToOne: false
+            referencedRelation: "flows"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "jobs_number_fkey"
+            columns: ["number"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["number"]
+          },
+        ]
       }
       leads: {
         Row: {
@@ -211,7 +240,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_jejum_admin: { Args: never; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
