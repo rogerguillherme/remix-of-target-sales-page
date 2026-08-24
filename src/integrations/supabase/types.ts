@@ -14,6 +14,93 @@ export type Database = {
   }
   public: {
     Tables: {
+      contacts: {
+        Row: {
+          number: string
+          name: string | null
+          status: string
+          flow_id: string | null
+          created_at: string
+        }
+        Insert: {
+          number: string
+          name?: string | null
+          status?: string
+          flow_id?: string | null
+          created_at?: string
+        }
+        Update: {
+          number?: string
+          name?: string | null
+          status?: string
+          flow_id?: string | null
+          created_at?: string
+        }
+        Relationships: []
+      }
+      jobs: {
+        Row: {
+          id: number
+          number: string
+          flow_id: string | null
+          stage: number
+          run_at: string
+          done: boolean
+        }
+        Insert: {
+          id?: number
+          number: string
+          flow_id?: string | null
+          stage: number
+          run_at: string
+          done?: boolean
+        }
+        Update: {
+          id?: number
+          number?: string
+          flow_id?: string | null
+          stage?: number
+          run_at?: string
+          done?: boolean
+        }
+        Relationships: []
+      }
+      flows: {
+        Row: {
+          id: string
+          name: string
+          steps: Json
+          purchase_messages: Json
+          no_sale_messages: Json
+          active: boolean
+          created_at: string
+        }
+        Insert: {
+          id?: string
+          name?: string
+          steps?: Json
+          purchase_messages?: Json
+          no_sale_messages?: Json
+          active?: boolean
+          created_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          steps?: Json
+          purchase_messages?: Json
+          no_sale_messages?: Json
+          active?: boolean
+          created_at?: string
+        }
+        Relationships: []
+      }
+      jejum_admins: {
+        Row: { email: string }
+        Insert: { email: string }
+        Update: { email?: string }
+        Relationships: []
+      }
       leads: {
         Row: {
           business_area: string | null

@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
+import PainelJejum from "./pages/PainelJejum";
 import QuemSomos from "./pages/QuemSomos";
 import NossosCases from "./pages/NossosCases";
 import Solucoes from "./pages/Solucoes";
@@ -33,6 +34,7 @@ const App = () => (
           <Route path="/solucoes" element={<Solucoes />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/painel-jejum" element={<PainelJejum />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
