@@ -51,7 +51,7 @@ export async function generateReply(
           { role: "system", content: contexto },
           ...history,
         ],
-        max_tokens: 160,
+        max_tokens: 220,
       }),
     });
 
