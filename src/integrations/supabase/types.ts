@@ -172,6 +172,38 @@ export type Database = {
         }
         Relationships: []
       }
+      messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: number
+          number: string
+          role: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: never
+          number: string
+          role: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: never
+          number?: string
+          role?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "messages_number_fkey"
+            columns: ["number"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["number"]
+          },
+        ]
+      }
       page_visits: {
         Row: {
           city: string | null
