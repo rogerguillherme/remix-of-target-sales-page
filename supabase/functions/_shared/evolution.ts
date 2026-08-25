@@ -58,6 +58,12 @@ export async function sendMedia(
   { url, caption = "", fileName = "arquivo.pdf", mediatype = "document" }:
     { url: string; caption?: string; fileName?: string; mediatype?: string },
 ) {
+  // A extensão do nome influencia o MIME inferido pela Evolution. O padrão
+  // anterior (arquivo.pdf) fazia imagens JPEG serem registradas como PDF.
+  const resolvedFileName = mediatype === "image" && fileName === "arquivo.pdf"
+    ? "imagem.jpg"
+    : fileName;
+
   try {
     const mediaResponse = await fetch(url, { method: "GET", redirect: "follow" });
     console.log("[sendMedia] media URL fetch:", JSON.stringify({
@@ -74,7 +80,7 @@ export async function sendMedia(
 
   const response = await evoFetch("/message/sendMedia/" + INSTANCE, {
     method: "POST",
-    body: JSON.stringify({ number, mediatype, media: url, caption, fileName }),
+    body: JSON.stringify({ number, mediatype, media: url, caption, fileName: resolvedFileName }),
   });
   console.log("[sendMedia] Evolution full response:", typeof response === "string" ? response : JSON.stringify(response));
   return response;
