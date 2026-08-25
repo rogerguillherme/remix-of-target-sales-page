@@ -97,11 +97,25 @@ async function handleExistingContact(
   }
 
   const finalText = replaceVars(reply, contact);
-  try {
-    await sendText(number, finalText);
-  } catch (e) {
-    console.error("Erro ao enviar resposta da IA:", e instanceof Error ? e.message : e);
-    return;
+
+  // Quebra a resposta em blocos separados por linha em branco e envia cada
+  // bloco como uma mensagem individual do WhatsApp, imitando uma pessoa real.
+  const chunks = finalText
+    .split("\n\n")
+    .map((chunk) => chunk.trim())
+    .filter((chunk) => chunk.length > 0);
+
+  for (let i = 0; i < chunks.length; i++) {
+    const chunk = chunks[i];
+    try {
+      await sendText(number, chunk);
+    } catch (e) {
+      console.error("Erro ao enviar resposta da IA:", e instanceof Error ? e.message : e);
+      return;
+    }
+    if (i < chunks.length - 1) {
+      await new Promise((r) => setTimeout(r, 1200));
+    }
   }
 
   await supabase.from("messages").insert({ number, role: "assistant", content: finalText });
