@@ -58,10 +58,26 @@ export async function sendMedia(
   { url, caption = "", fileName = "arquivo.pdf", mediatype = "document" }:
     { url: string; caption?: string; fileName?: string; mediatype?: string },
 ) {
-  return evoFetch("/message/sendMedia/" + INSTANCE, {
+  try {
+    const mediaResponse = await fetch(url, { method: "GET", redirect: "follow" });
+    console.log("[sendMedia] media URL fetch:", JSON.stringify({
+      requestedUrl: url,
+      finalUrl: mediaResponse.url,
+      status: mediaResponse.status,
+      contentType: mediaResponse.headers.get("content-type"),
+      contentLength: mediaResponse.headers.get("content-length"),
+    }));
+    await mediaResponse.body?.cancel();
+  } catch (error) {
+    console.error("[sendMedia] media URL fetch failed:", error instanceof Error ? error.message : String(error));
+  }
+
+  const response = await evoFetch("/message/sendMedia/" + INSTANCE, {
     method: "POST",
     body: JSON.stringify({ number, mediatype, media: url, caption, fileName }),
   });
+  console.log("[sendMedia] Evolution full response:", typeof response === "string" ? response : JSON.stringify(response));
+  return response;
 }
 
 export function replaceVars(text: string, contact: { name?: string | null }) {
