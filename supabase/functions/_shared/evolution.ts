@@ -76,7 +76,8 @@ export function replaceVars(text: string, contact: { name?: string | null }) {
     .replace(/{{nome}}/g, primeiroNome)
     .replace(/{{data_inicio}}/g, VARS.data_inicio)
     .replace(/{{data_limite}}/g, VARS.data_limite)
-    .replace(/{{link}}/g, VARS.link);
+    .replace(/{{link}}/g, VARS.link)
+    .replace(/\[\s*link[^\]]*\]/gi, VARS.link);
 }
 
 export function guiaUrl() {
