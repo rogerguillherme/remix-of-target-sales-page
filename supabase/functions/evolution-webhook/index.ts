@@ -134,6 +134,8 @@ Deno.serve(async (req) => {
       const number = onlyDigits(jid);
       if (!number) return;
       const name = data.pushName || null;
+      const incomingText = extractText(data);
+
 
       const { data: existing } = await supabase
         .from("contacts")
