@@ -36,8 +36,18 @@ Deno.serve(async (req) => {
       if (!number) return;
       const name = data.pushName || null;
 
-      const { data: existing } = await supabase.from("contacts").select("number").eq("number", number).maybeSingle();
-      if (existing) return; // já está no fluxo — não reinicia
+      const { data: existing } = await supabase
+        .from("contacts")
+        .select("number, name, status")
+        .eq("number", number)
+        .maybeSingle();
+
+      if (existing) {
+        // Contato já cadastrado: responde com o agente de IA (ou trata o opt-out).
+        await handleExistingContact(supabase, existing, incomingText);
+        return;
+      }
+
 
       const { data: flow } = await supabase.from("flows").select("*").eq("active", true).limit(1).maybeSingle();
       if (!flow || !Array.isArray(flow.steps) || flow.steps.length === 0) {
