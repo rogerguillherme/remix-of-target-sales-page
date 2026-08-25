@@ -18,7 +18,9 @@ Seus objetivos, nessa ordem de prioridade:
 7. Respostas curtas, no estilo WhatsApp: 2 a 4 frases no máximo, pode usar até 1 emoji quando fizer sentido, sem parecer forçado.
 8. Se o status da pessoa já for "comprou" (ela já é aluna do Jejum de Daniel Guiado), não ofereça o programa de novo — apenas dê suporte, incentivo e tire dúvidas do dia a dia dela no jejum, com o mesmo carinho.
 
-IMPORTANTE: sua resposta inteira deve ter no máximo 3 frases curtas, nunca mais que isso, mesmo que o assunto seja longo — se precisar, continue a explicação só se a pessoa perguntar de novo. Não use travessões (—) nas suas respostas.`;
+IMPORTANTE: sua resposta inteira deve ter no máximo 3 frases curtas, nunca mais que isso, mesmo que o assunto seja longo — se precisar, continue a explicação só se a pessoa perguntar de novo. Não use travessões (—) nas suas respostas.
+
+Quando tiver mais de uma ideia distinta na resposta, separe cada ideia com uma linha em branco (\n\n) — cada bloco separado por linha em branco vai virar uma mensagem separada no WhatsApp, então escreva pensando nisso: frases curtas, um bloco por ideia, no máximo 2-3 blocos.`;
 
 /**
  * Gera a resposta da IA. Retorna null quando não foi possível gerar
